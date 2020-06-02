@@ -33,7 +33,7 @@ public class BuyerAgent extends Agent {
 		if (this.item != null ) {
 
 
-			System.out.println("Target item is "+ this.item);
+			System.out.println("item is "+ this.item);
 
 			addBehaviour(new TickerBehaviour(this, 60000) {
 				protected void onTick() {
