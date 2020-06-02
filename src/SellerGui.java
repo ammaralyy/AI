@@ -18,12 +18,12 @@ class SellerGui extends JFrame {
         myAgent = a;
 
         JPanel p = new JPanel();
-        p.setLayout(new GridLayout(2, 2));
+        p.setLayout(new GridLayout(4, 4));
         p.add(new JLabel("item:"));
-        titleField = new JTextField(15);
+        titleField = new JTextField(25);
         p.add(titleField);
         p.add(new JLabel("Price:"));
-        priceField = new JTextField(15);
+        priceField = new JTextField(25);
         p.add(priceField);
         getContentPane().add(p, BorderLayout.CENTER);
 

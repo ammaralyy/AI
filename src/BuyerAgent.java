@@ -55,14 +55,11 @@ public class BuyerAgent extends Agent {
 					catch (FIPAException fe) {
 						fe.printStackTrace();
 					}
-
-					// Perform the request
 					myAgent.addBehaviour(new RequestPerformer());
 				}
 			} );
 		}
 		else {
-			// Make the agent terminate
 			System.out.println("No target item title specified");
 			doDelete();
 		}
@@ -97,13 +94,11 @@ public class BuyerAgent extends Agent {
 				cfp.setConversationId("book-trade");
 				cfp.setReplyWith("cfp"+System.currentTimeMillis()); // Unique value
 				myAgent.send(cfp);
-				// Prepare the template to get proposals
 				mt = MessageTemplate.and(MessageTemplate.MatchConversationId("book-trade"),
 						MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
 				step = 1;
 				break;
 			case 1:
-				// Receive all proposals/refusals from seller agents
 				ACLMessage reply = myAgent.receive(mt);
 				if (reply != null) {
 					// Reply received
@@ -118,8 +113,7 @@ public class BuyerAgent extends Agent {
 					}
 					repliesCnt++;
 					if (repliesCnt >= sellerAgents.length) {
-						// We received all replies
-						step = 2; 
+						step = 2;
 					}
 				}
 				else {
@@ -127,23 +121,19 @@ public class BuyerAgent extends Agent {
 				}
 				break;
 			case 2:
-				// Send the purchase order to the seller that provided the best offer
 				ACLMessage order = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
 				order.addReceiver(bestSeller);
 				order.setContent(item);
 				order.setConversationId("book-trade");
 				order.setReplyWith("order"+System.currentTimeMillis());
 				myAgent.send(order);
-				// Prepare the template to get the purchase order reply
 				mt = MessageTemplate.and(MessageTemplate.MatchConversationId("book-trade"),
 						MessageTemplate.MatchInReplyTo(order.getReplyWith()));
 				step = 3;
 				break;
 			case 3:      
-				// Receive the purchase order reply
 				reply = myAgent.receive(mt);
 				if (reply != null) {
-					// Purchase order reply received
 					if (reply.getPerformative() == ACLMessage.INFORM) {
 						// Purchase successful. We can terminate
 						System.out.println(item+" successfully purchased from agent "+reply.getSender().getName());
@@ -169,5 +159,5 @@ public class BuyerAgent extends Agent {
 			}
 			return ((step == 2 && bestSeller == null) || step == 4);
 		}
-	}  // End of inner class RequestPerformer
+	}
 }

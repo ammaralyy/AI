@@ -25,16 +25,16 @@ public class SellerAgent extends Agent {
 		myGui = new SellerGui(this);
 		myGui.showGui();
 
-		DFAgentDescription dfd = new DFAgentDescription();
+		DFAgentDescription DFD = new DFAgentDescription();
 
-		dfd.setName(getAID());
+		DFD.setName(getAID());
 
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType("item selling");
 		sd.setName("JADE-item-trading");
-		dfd.addServices(sd);
+		DFD.addServices(sd);
 		try {
-			DFService.register(this, dfd);
+			DFService.register(this, DFD);
 		}
 		catch (FIPAException fe) {
 			fe.printStackTrace();
@@ -60,7 +60,7 @@ public class SellerAgent extends Agent {
 		addBehaviour(new OneShotBehaviour() {
 			public void action() {
 				catalogue.put(title, new Integer(price));
-				System.out.println(title+" inserted into catalogue. Price = "+price);
+				System.out.println(title+" inserted into catalogue. Price = " + price);
 			}
 		} );
 	}

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         jade.core.Runtime r = jade.core.Runtime.instance();
-        Profile profile = new ProfileImpl("localhost", 5000,"aa");
+        Profile profile = new ProfileImpl("localhost", 5000,"Ghada");
         ContainerController container = r.createMainContainer(profile);
 
         AgentController Agent1;

@@ -28,9 +28,9 @@ public class BuyerGui extends JFrame {
         buyerAgent = b;
 
         JPanel p = new JPanel();
-        p.setLayout(new GridLayout(2, 2));
+        p.setLayout(new GridLayout(4, 4));
         p.add(new JLabel("item:"));
-        titleField = new JTextField(15);
+        titleField = new JTextField(25);
         p.add(titleField);
 
         getContentPane().add(p, BorderLayout.CENTER);
@@ -40,11 +40,8 @@ public class BuyerGui extends JFrame {
             public void actionPerformed(ActionEvent ev) {
                 try {
                     title = titleField.getText().trim();
-//                    buyerAgent.updateCatalogue(title, Integer.parseInt(price));
                     buyerAgent.action(title);
-//                    titleField.setText("");
                 } catch (Exception e) {
-//                    JOptionPane.showMessageDialog(/*BuyerGui.this, "Invalid values. " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE*/);
                 }
             }
         });
@@ -167,7 +164,7 @@ class RequestPerformer extends Behaviour {
 
    public boolean done() {
        if (step == 2 && bestSeller == null) {
-           System.out.println("Attempt failed: "+item+" not available for sale");
+           System.out.println("failed: "+item+" not available");
        }
        return ((step == 2 && bestSeller == null) || step == 4);
    }
